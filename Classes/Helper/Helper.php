@@ -185,8 +185,10 @@ class Helper implements SingletonInterface
             )
             ->execute()
             ->fetch();
-        $pid = (int)$triggerElement['pid'];
-        return is_array($triggerElement) && $pid ? $pid : 0;
+        if ($triggerElement === false) {
+            return 0;
+        }
+        return (int)($triggerElement['pid'] ?? 0);
     }
 
     /**
